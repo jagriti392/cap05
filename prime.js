@@ -7,10 +7,3 @@ if(number%i==0)
 fact++
 }
 }
-if(fact==2)
-{
-console.log("prime")
-}
-else{
-console.log("Not prime")
-}
