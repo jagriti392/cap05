@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text", id="myInput">
+    <button id="myButton">Submit</button>
+    <h2><span>Entered value: </span>  <span id="para"></span></h2>
+</body>
+<script>
+    let input = document.querySelector("input");
+    let button = document.querySelector("#myButton");
+    let h2 = document.querySelector("h2");
+    let paragraph = document.querySelector("#para");
+    button.addEventListener("click", function() {
+        paragraph.innerText = input.value;
+        let a = h2.innerText + paragraph;
+        console.log(a);
+        alert(input.value)
+    })
+</script>
+</html>
