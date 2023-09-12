@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+//Author constructor function
+
+
+function Author(name, birthYear, nationality) {
+  this.name = name;
+  this.birthYear = birthYear;
+  this.nationality = nationality;
+}
+ Book constructor function
+function Book(title, author, genre, price) {
+  this.title = title;
+  this.author = author;
+  this.genre = genre;
+  this.price = price;
+}
+
+// Add a method to the Book prototype to get book information
+Book.prototype.getBookInfo = function () {
+  console.log(`Title: ${this.title}`);
+  console.log(`Author: ${this.author.name}`);
+  console.log(`Genre: ${this.genre}`);
+  console.log(`Price: $${this.price.toFixed(2)}`);
+  console.log("--------------");
+};
+
+// Create instances of authors
+const author1 = new Author("J.K. Rowling", 1965, "British");
+const author2 = new Author("George Orwell", 1903, "British");
+
+// Create instances of books
+const book1 = new Book("Harry Potter and the Sorcerer's Stone", author1, "Fantasy", 12.99);
+const book2 = new Book("1984", author2, "Dystopian", 9.99);
+const book3 = new Book("Harry Potter and the Chamber of Secrets", author1, "Fantasy", 14.99);
+
+// Create an array to store the books in the bookstore
+const bookstore = [book1, book2, book3];
+
+// Display book details for each book in the bookstore
+bookstore.forEach((book) => {
+  book.getBookInfo();
+});
+</html>
