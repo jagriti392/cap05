@@ -1,0 +1,59 @@
+<!--Problem Statement :-
+You have been appointed as senior developer in Tata’s R&D department. The engineers there are lazy, they don’t want to do everything from scratch whenever they create a new model. They expect you to help them create an inheritance model for the automobiles.
+
+Description :-
+Implement an inheritance model for four wheeler automobiles.
+Implement using both object.create() and constructor functions().
+Think of properties of what can be inherited.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automobile</title>
+</head>
+<body>
+    </body>
+    <script>
+        // using object.creat
+        let automobile ={
+            type : "four wheeler",
+            start : function(){
+                console.log("starting the engine")
+            },
+        }
+        let car = Object.create(automobile)
+        car.seats=4
+        car.doors=4
+        car.horn =function(){
+            console.log("Beep Beep!")
+        
+        }
+        let truck =Object.create(automobile)
+        truck.seats =2
+        truck.doors=2
+        truck.load =function (){
+            console.log("loading vehicles...")
+        }
+        console.log(car)
+        console.log(truck)
+
+
+//using constructor function
+function Automobile (type,start,stop){
+    this.type=type
+    this.start=start
+    this.stop=stop
+}
+Automobile.prototype.start = function()
+{
+    console.log('starting the engine.')
+}
+Automobile.prototype.stop()
+{
+    console.log('stopping the engine')
+
+}
+let automobile1 = new Automobile(type,start,stop)
+</script>
+</html>
