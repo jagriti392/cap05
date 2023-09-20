@@ -15,45 +15,84 @@ Think of properties of what can be inherited.-->
 <body>
     </body>
     <script>
-        // using object.creat
-        let automobile ={
-            type : "four wheeler",
-            start : function(){
-                console.log("starting the engine")
-            },
-        }
-        let car = Object.create(automobile)
-        car.seats=4
-        car.doors=4
-        car.horn =function(){
-            console.log("Beep Beep!")
-        
-        }
-        let truck =Object.create(automobile)
-        truck.seats =2
-        truck.doors=2
-        truck.load =function (){
-            console.log("loading vehicles...")
-        }
-        console.log(car)
-        console.log(truck)
-
-
-//using constructor function
-function Automobile (type,start,stop){
-    this.type=type
-    this.start=start
-    this.stop=stop
-}
-Automobile.prototype.start = function()
-{
-    console.log('starting the engine.')
-}
-Automobile.prototype.stop()
-{
-    console.log('stopping the engine')
-
-}
-let automobile1 = new Automobile(type,start,stop)
+    
 </script>
-</html>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototypal Inheritance</title>
+</head>
+<body>
+    <h1>Automoblie Inheritance Modal</h1>
+
+    <script>
+
+         /*Description :-
+          Implement an inheritance model for four wheeler automobiles.
+          Implement using both object.create() and constructor functions().
+          Think of properties of what can be inherited.*/
+        
+        let fourWheeler={
+            wheels:4,
+            fuel:'unleaded',
+            startEngine(){
+                console.log("Engine Started")
+            },
+            stopEngine(){
+                console.log("Engine Stoped")
+            },
+        }  
+           const sedan = Object.create(fourWheeler)
+           sedan.modal = "sadan";
+           sedan.color = "red";
+           sedan.year =  2023;
+
+           console.log(`Model: ${sedan.modal}`);
+           console.log(`Color: ${sedan.color}`);
+           console.log(`Year: ${sedan.year}`);
+           sedan.startEngine();
+           sedan.stopEngine();
+           console.log(`Number of Wheels: ${sedan.wheels}`);
+           console.log(`Fuel type: ${sedan.fuel}`);
+           
+
+           console.log("***************************");
+
+           //using constructor function
+
+           function FourWheeler() {
+            this.wheels = 4;
+            this.fuel = 'unleaded';
+           }
+           
+           FourWheeler.prototype.startEngine = function(){
+            console.log("Engine Started");
+           };
+
+           FourWheeler.prototype.stopEngine = function(){
+            console.log("Engine Stoped");
+           };
+
+
+           function SUV(modal, color, year){
+            this.modal=modal;
+            this.color=color;
+            this.year=year;
+           }
+
+           SUV.prototype = new FourWheeler();
+
+           const suv = new SUV('SUV', 'White', 2023)
+           console.log(`Model: ${suv.modal}`);
+           console.log(`Color: ${suv.color}`);
+           console.log(`Year: ${suv.year}`);
+           suv.startEngine();
+           suv.stopEngine();
+           console.log(`Number of Wheels: ${suv.wheels}`);
+           console.log(`Fuel type: ${suv.fuel}`);
+
+ </script>
+    
+</body>
