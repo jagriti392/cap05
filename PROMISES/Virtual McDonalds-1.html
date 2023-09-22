@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Food Ordering System</title>
+    <style>
+        h1{
+
+            color:blue;
+            font-style: oblique;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #food-image {
+            display: none;
+            margin: 20px;
+        }
+        #order-id {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Our Virtual Restaurant</h1>
+    <label for="food-items">Choose Food Items:</label><br>
+    <input type="checkbox" id="burger" name="food" value="Burger">
+    <label for="burger">Burger</label><br>
+    <input type="checkbox" id="pizza" name="food" value="Pizza">
+    <label for="pizza">Pizza</label><br>
+    <input type="checkbox" id="fries" name="food" value="Fries">
+    <label for="fries">Fries</label><br>
+    <input type="checkbox" id="drink" name="food" value="Drink">
+    <label for="drink">Drink</label><br><br>
+    <button id="order-button">Order Food</button>
+    <div id="food-image">
+        <img src="" alt="Food Item">
+    </div>
+    <div id="order-id"></div>
+
+    <script>
+        document.getElementById('order-button').addEventListener('click', () => {
+            const selectedItems = [];
+            const checkboxes = document.querySelectorAll('input[name="food"]:checked');
+            
+            checkboxes.forEach((checkbox) => {
+                selectedItems.push(checkbox.value);
+            });
+            
+            if (selectedItems.length === 0) {
+                alert('Please select at least one food item.');
+                return;
+            }
+            
+            // Simulate order processing with a random delay
+            const randomDelay = Math.floor(Math.random() * 5000) + 1000; // Random delay between 1 to 6 seconds
+            const orderId = Math.floor(Math.random() * 1000) + 1; // Random order ID
+            
+            setTimeout(() => {
+                const foodImage = document.getElementById('food-image');
+                const orderIDDiv = document.getElementById('order-id');
+                const selectedFood = selectedItems[Math.floor(Math.random() * selectedItems.length)];
+                
+                foodImage.innerHTML = `<img src="${getImageUrl(selectedFood)}" alt="${selectedFood}">`;
+                orderIDDiv.innerText = `Order ID: ${orderId}`;
+                foodImage.style.display = 'block';
+            }, randomDelay);
+        });
+        
+        // Function to get image URL based on selected food
+        function getImageUrl(food) {
+            switch (food) {
+                case 'Burger':
+                    return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmBkWces3yCfr9dF6wDd6eHlei94NRHgHEEA&usqp=CAU'; // Replace with actual image URLs
+                case 'Pizza':
+                    return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyYtYl18JC7sypH9y6_skviqzR7MtUFYFWoA&usqp=CAU';
+                case 'Fries':
+                    return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVnHQEnD5OZJLIdUGCb31Eod-6MLMHIB_yLg&usqp=CAU';
+                case 'Drink':
+                    return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5VFOPP3ZkFLptISR8GHv7LLTuhSKzbyCfQ-KKFrzJQu7yQwahAReL58BLhsK1EVzD6Ek&usqp=CAU';
+                default:
+                    return '';
+            }
+        }
+    </script>
+</body>
+</html>

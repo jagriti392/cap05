@@ -1,0 +1,73 @@
+<!--Mimic the payment system of phonePe using promises.
+The payment can be rejected or accepted
+On success show the same UI as shown on phonePe app.
+On Failure also show the same UI as shown on phonePe app.
+During the processing state show the Processing UI as shown on phonePe.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #payment-status {
+            font-size: 24px;
+            margin: 20px;
+        }
+        #processing-spinner {
+            display: none;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PhonePe Payment System</h1>
+    <div id="payment-status">Payment Status: <span id="status-text"></span></div>
+    <div id="processing-spinner">Processing...</div>
+    <button id="make-payment">Make Payment</button>
+<script>
+        document.getElementById('make-payment').addEventListener('click', () => {
+            // Display the processing UI
+         const processingSpinner = document.getElementById('processing-spinner');
+            processingSpinner.style.display = 'block';
+
+            // Simulate payment processing with a promise
+            const paymentPromise = new Promise((resolve, reject) => {
+                // Simulate a random delay for processing
+                const randomDelay = Math.floor(Math.random() * 3000) + 1000; // Random delay between 1 to 4 seconds
+
+                setTimeout(() => {
+                    // Simulate a random payment success or failure
+                    const isSuccess = Math.random() < 0.5;
+
+                    if (isSuccess) {
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                }, randomDelay);
+            });
+
+            // Handle payment success
+            paymentPromise.then(() => {
+                const statusText = document.getElementById('status-text');
+                statusText.innerText = 'Payment Successful';
+                processingSpinner.style.display = 'none';
+            })
+            // Handle payment failure
+            .catch(() => {
+                const statusText = document.getElementById('status-text');
+                statusText.innerText = 'Payment Failed';
+                processingSpinner.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+                    
+
+
