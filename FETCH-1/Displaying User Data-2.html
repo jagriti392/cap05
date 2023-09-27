@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Displaying User Data</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#userContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.user-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.user-avatar {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+</style>
+<body>
+    <h1>Displaying User Data</h1>
+    <button id="fetchButton">Fetch Users</button>
+    <div id="userContainer"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const fetchButton = document.getElementById("fetchButton");
+    const userContainer = document.getElementById("userContainer");
+
+    fetchButton.addEventListener("click", () => {
+        fetch("https://reqres.in/api/users")
+            .then((response) => response.json())
+            .then((data) => {
+                userContainer.innerHTML = "";
+                data.data.forEach((user) => {
+                    const userCard = document.createElement("div");
+                    userCard.classList.add("user-card");
+
+                    const userAvatar = document.createElement("img");
+                    userAvatar.classList.add("user-avatar");
+                    userAvatar.src = user.avatar;
+
+                    const userName = document.createElement("h2");
+                    userName.textContent = `${user.first_name} ${user.last_name}`;
+
+                    const userEmail = document.createElement("p");
+                    userEmail.textContent = user.email;
+
+                    userCard.appendChild(userAvatar);
+                    userCard.appendChild(userName);
+                    userCard.appendChild(userEmail);
+
+                    userContainer.appendChild(userCard);
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+            });
+    });
+});
+
+    </script>
+</body>
+</html>
