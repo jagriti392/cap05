@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Counter</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.counter {
+    margin: 50px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+</style>
+<body>
+    <div class="counter">
+        <h1 id="count">0</h1>
+        <button id="toggle">Start</button>
+        <button id="increment">Increment</button>
+        <button id="decrement">Decrement</button>
+    </div>
+    <script>
+class Counter {
+    constructor() {
+        this.count = 0;
+        this.intervalId = null;
+        this.isRunning = false;
+
+        this.toggleButton = document.getElementById('toggle');
+        this.incrementButton = document.getElementById('increment');
+        this.decrementButton = document.getElementById('decrement');
+        this.countDisplay = document.getElementById('count');
+
+        this.toggleButton.addEventListener('click', this.toggle.bind(this));
+        this.incrementButton.addEventListener('click', this.increment.bind(this));
+        this.decrementButton.addEventListener('click', this.decrement.bind(this));
+    }
+
+    toggle() {
+        if (!this.isRunning) {
+            this.start();
+            this.toggleButton.textContent = 'Stop';
+        } else {
+            this.stop();
+            this.toggleButton.textContent = 'Start';
+        }
+    }
+
+    start() {
+        this.intervalId = setInterval(() => {
+            this.count++;
+            this.countDisplay.textContent = this.count;
+        }, 1000);
+        this.isRunning = true;
+        this.disableButtons(true);
+    }
+
+    stop() {
+        clearInterval(this.intervalId);
+        this.isRunning = false;
+        this.disableButtons(false);
+    }
+
+    increment() {
+        if (!this.isRunning) {
+            this.count++;
+            this.countDisplay.textContent = this.count;
+        }
+    }
+
+    decrement() {
+        if (!this.isRunning) {
+            this.count--;
+            this.countDisplay.textContent = this.count;
+        }
+    }
+
+    disableButtons(disabled) {
+        this.incrementButton.disabled = disabled;
+        this.decrementButton.disabled = disabled;
+    }
+}
+
+const counter = new Counter();
+
+    </script>
+</body>
+</html>
