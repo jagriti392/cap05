@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <!-- Include necessary CSS and JavaScript libraries -->
+</head>
+<body>
+    <div class="header">
+        <input type="text" id="cityInput" placeholder="Enter city name">
+        <button id="searchButton">Search</button>
+    </div>
+    <div class="main-content">
+        <div class="map-container">
+            <!-- Google Maps will be embedded here -->
+        </div>
+        <div class="weather-details">
+            <!-- Weather details will be displayed here -->
+        </div>
+    </div>
+    <script>
+        // Get references to HTML elements
+const cityInput = document.getElementById('cityInput');
+const searchButton = document.getElementById('searchButton');
+const weatherDetails = document.querySelector('.weather-details');
+const mapContainer = document.querySelector('.map-container');
+
+// Replace with your OpenWeatherMap API key
+const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+
+// Event listener for the search button
+searchButton.addEventListener('click', () => {
+    const cityName = cityInput.value;
+    if (cityName) {
+        getWeatherData(cityName);
+        embedGoogleMap(cityName);
+    }
+});
+
+// Function to fetch weather data from OpenWeatherMap
+function getWeatherData(cityName) {
+    // Make an API request to OpenWeatherMap
+    // Parse the response and display weather details in weatherDetails div
+}
+
+// Function to embed Google Map
+function embedGoogleMap(cityName) {
+    // Embed a Google Map with the specified city location
+    // Use Google Maps Embed API with your API key
+}
+
+    </script>
+</body>
+</html>

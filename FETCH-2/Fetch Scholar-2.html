@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Store Products</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+#search-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#search {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#sort-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 250px;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.product-title {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.product-price {
+    color: #007bff;
+}
+
+</style>
+<body>
+    <header>
+        <h1>Fake Store Products</h1>
+        <div id="search-container">
+            <input type="text" id="search" placeholder="Search products...">
+            <button id="sort-button">Sort by Price</button>
+        </div>
+    </header>
+    <div id="product-container"></div>
+    
+    <script>
+        const productContainer = document.getElementById('product-container');
+const searchInput = document.getElementById('search');
+const sortButton = document.getElementById('sort-button');
+
+let products = [];
+
+// Fetch products from the API
+fetch('https://fakestoreapi.com/products')
+    .then((response) => response.json())
+    .then((data) => {
+        products = data;
+        displayProducts(products);
+    })
+    .catch((error) => console.error('Error fetching data:', error));
+
+// Display products on the DOM
+function displayProducts(productsArray) {
+    productContainer.innerHTML = '';
+
+    productsArray.forEach((product) => {
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+        productCard.innerHTML = `
+            <img class="product-image" src="${product.image}" alt="${product.title}">
+            <h3 class="product-title">${product.title}</h3>
+            <p class="product-price">$${product.price}</p>
+        `;
+        productContainer.appendChild(productCard);
+    });
+}
+
+// Search functionality
+searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredProducts = products.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm)
+    );
+    displayProducts(filteredProducts);
+});
+
+// Sorting functionality
+sortButton.addEventListener('click', () => {
+    const sortedProducts = [...products].sort((a, b) => a.price - b.price);
+    displayProducts(sortedProducts);
+});
+
+    </script>
+</body>
+</html>
